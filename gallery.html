@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memories ❤️</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fef6e4;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    /* Gallery Grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      padding: 10px;
+      justify-items: center;
+    }
+
+    .gallery-item {
+      border: 3px solid #ff4d6d;
+      border-radius: 20px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 220px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      background: #fff;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover; 
+      display: block;
+      border-radius: 20px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .modal img {
+      max-width: 95%;
+      max-height: 80%;
+      border-radius: 20px;
+      animation: flipZoom 0.8s ease forwards;
+    }
+
+    @keyframes flipZoom {
+      0% { transform: scale(0) rotateY(90deg); opacity: 0; }
+      100% { transform: scale(1) rotateY(0deg); opacity: 1; }
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Heart overlay in modal */
+    .modal-heart {
+      position: absolute;
+      font-size: 50px;
+      color: #ff4d6d;
+      opacity: 0;
+      animation: heartPop 1s forwards;
+      pointer-events: none;
+    }
+
+    @keyframes heartPop {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      30% { transform: scale(1.2) rotate(-10deg); opacity: 1; }
+      60% { transform: scale(1) rotate(10deg); opacity: 1; }
+      100% { transform: scale(0) rotate(0deg); opacity: 0; }
+    }
+
+    /* WhatsApp Call Button */
+    .whatsapp-btn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 40px;
+      background: #25D366;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1ebe5d;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    /* Pulsing heart inside button */
+    .btn-heart {
+      display: inline-block;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    /* Responsive Text */
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      .gallery-item img { height: 140px; }
+      .whatsapp-btn { font-size: 16px; padding: 10px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+   <h1>💖 Our Sweet Memories 💖</h1>
+
+  <!-- Gallery -->
+  <div class="gallery">
+    <div class="gallery-item" onclick="openModal(this.querySelector('img'))">
+      <img src="C:/Users/sures/OneDrive/Desktop/LAPPY/2Y_PROJECT/love/WhatsApp Image 2025-08-31 at 03.27.00_9c8a2a50.jpg" alt="Memory 1">
+    </div>
+    <div class="gallery-item" onclick="openModal(this.querySelector('img'))">
+      <img src="C:/Users/sures/OneDrive/Desktop/LAPPY/2Y_PROJECT/love/WhatsApp Image 2025-08-31 at 03.27.26_04fa89ab.jpg" alt="Memory 2">
+    </div>
+    <div class="gallery-item" onclick="openModal(this.querySelector('img'))">
+      <img src="C:/Users/sures/OneDrive/Desktop/LAPPY/2Y_PROJECT/love/WhatsApp Image 2025-08-31 at 03.29.16_b7ec8b7b.jpg" alt="Memory 3">
+    </div>
+    <div class="gallery-item" onclick="openModal(this.querySelector('img'))">
+      <img src="C:/Users/sures/OneDrive/Desktop/LAPPY/2Y_PROJECT/love/WhatsApp Image 2025-08-31 at 03.31.00_0b59d3f2.jpg" alt="Memory 4">
+    </div>
+    <div class="gallery-item" onclick="openModal(this.querySelector('img'))">
+      <img src="img5.jpg" alt="Memory 5">
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img id="modalImg" src="">
+    <div class="modal-heart" id="modalHeart">❤️</div>
+  </div>
+
+  <!-- WhatsApp Call Button -->
+  <button class="whatsapp-btn" onclick="callWhatsApp()">
+    📞 Call Poojitha on WhatsApp <span class="btn-heart">❤️</span>
+  </button>
+
+  <script>
+    function openModal(img) {
+      const modal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("modalImg");
+      const modalHeart = document.getElementById("modalHeart");
+
+      modal.style.display = "flex";
+      modalImg.src = img.src;
+
+      // Show heart after 0.8s (after flip zoom)
+      setTimeout(() => {
+        modalHeart.style.opacity = 1;
+        modalHeart.style.animation = 'heartPop 1s forwards';
+      }, 800);
+
+      // Hide heart after animation
+      setTimeout(() => {
+        modalHeart.style.opacity = 0;
+      }, 1800);
+    }
+
+    function closeModal() {
+      document.getElementById("imgModal").style.display = "none";
+    }
+
+    function callWhatsApp() {
+      window.location.href = "https://wa.me/9347871134";
+    }
+  </script>
+
+</body>
+</html>

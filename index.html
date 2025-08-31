@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #f5deb3; /* Biscuit color */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .btn {
+      background: blue;
+      color: white;
+      font-size: 28px;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .btn:hover {
+      background: #ff3355;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn" onclick="startSurprise()">Click Me for Surprise ❤️</button>
+
+  <script>
+    function startSurprise() {
+      // Redirect to next page
+      window.location.href = "surprise.html";
+    }
+  </script>
+</body>
+</html>
